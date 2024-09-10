@@ -4,32 +4,34 @@ using UnityEngine;
 
 public class CameraControlScript : MonoBehaviour
 {
-    [SerializeField] float speed = 3;
-    [SerializeField] float distance = 10;
+    [SerializeField] float key_speed = 300;
+    [SerializeField] float mouse_speed = 300;
+    [SerializeField] float distance = 20;
+
+    float max_dist = 30;
+    float min_dist = 10;
+    float dist_speed = 1;
 
     float angleX = 0;
     float angleY = 0;
 
     void Update()
     {
-        // rotation
 
-        // movement
+    // movement
+      float input_y = key_speed*Input.GetAxisRaw("Vertical")      + mouse_speed*(Input.GetMouseButton(2) ? 1 : 0) * Input.GetAxis("Mouse Y");
+      float input_x = -1*key_speed*Input.GetAxisRaw("Horizontal") + mouse_speed*(Input.GetMouseButton(2) ? 1 : 0) * Input.GetAxis("Mouse X");
 
-        //Vector3 velocity = transform.up*input_y + transform.right*input_x;
-        //velocity.Normalize();
+      angleY += input_x * Time.deltaTime * dist_speed;
+      angleX += input_y * Time.deltaTime * dist_speed;
 
-
-        float input_y = Input.GetAxisRaw("Vertical") + (Input.GetMouseButton(2) ? 1 : 0) * Input.GetAxis("Mouse Y");
-        float input_x = -Input.GetAxisRaw("Horizontal") - (Input.GetMouseButton(2) ? 1 : 0) * Input.GetAxis("Mouse X");
-
-        Debug.Log(input_x);
-        angleY += input_x * Time.deltaTime* speed;
-        angleX += input_y * Time.deltaTime*speed;
-
-        transform.localEulerAngles = new Vector3(angleX, angleY,0);
-
-        transform.position = Vector3.zero - transform.forward * distance;
+      transform.localEulerAngles = new Vector3(angleX, angleY, 0);
+      transform.position = Vector3.zero - transform.forward * distance;
+    
+    // distance
+      float input_dist = Input.mouseScrollDelta.y;
+      distance = distance >= min_dist ? (distance <= max_dist ? distance + input_dist : max_dist) : min_dist;
+      dist_speed = distance/20;
     }
 
 }
