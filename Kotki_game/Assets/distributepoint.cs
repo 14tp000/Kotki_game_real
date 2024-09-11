@@ -160,20 +160,30 @@ public class distributeverticies : MonoBehaviour
         return new Vector3((v1.x + v2.x) / 2, (v1.y + v2.y) / 2, (v1.z + v2.z) / 2);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        foreach(var pt in verticies)
-        {
-            Gizmos.DrawSphere(pt, gizmosRadius);
-        }
-        Gizmos.color = Color.yellow;
+private void OnDrawGizmos()
+{
+    Gizmos.color = Color.red;
 
-        foreach(var face in faces)
+    // Sprawdź, czy lista verticies została zainicjalizowana
+    if (verticies != null)
+    {
+        foreach (var pt in verticies)
+        {
+            Gizmos.DrawSphere(pt, gizmosRadius); // Rysujemy sfery bez dodatkowego skalowania
+        }
+    }
+
+    Gizmos.color = Color.yellow;
+
+    // Sprawdź, czy lista faces została zainicjalizowana
+    if (faces != null)
+    {
+        foreach (var face in faces)
         {
             Gizmos.DrawLine(face.vertA, face.vertB);
             Gizmos.DrawLine(face.vertB, face.vertC);
             Gizmos.DrawLine(face.vertC, face.vertA);
         }
     }
+}
 }
