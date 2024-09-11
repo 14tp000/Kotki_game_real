@@ -32,7 +32,8 @@ public class CameraControlScript : MonoBehaviour
     
     // distance
       float input_dist = Input.mouseScrollDelta.y;
-      distance = distance >= min_dist ? (distance <= max_dist ? distance + input_dist : max_dist) : min_dist;
+      float dist_change = distance + input_dist
+      distance = distance >= min_dist ? (distance <= max_dist ? dist_change : max_dist) : min_dist;
       dist_speed = distance/20;
     }
 
