@@ -6,11 +6,13 @@ public class CameraControlScript : MonoBehaviour
 {
     [SerializeField] float key_speed = 300;
     [SerializeField] float mouse_speed = 300;
-    [SerializeField] float distance = 20;
+    
 
-    float max_dist = 30;
-    float min_dist = 10;
+    [SerializeField] float max_dist = 30;
+    [SerializeField] float min_dist = 10;
+
     float dist_speed = 1;
+    float distance = 20;
 
     float angleX = 0;
     float angleY = 0;
