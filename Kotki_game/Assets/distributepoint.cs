@@ -218,7 +218,7 @@ public void PrintNeighbours()
         {
             neighboursInfo += $"[{i}] {vert.neighbours[i]}, ";
         }
-        Debug.Log(vert.position + " amongus " + neighboursInfo);PrintVertexInfo(vert);
+        Debug.Log(vert.position + " amongus " + neighboursInfo);
         }
 }
 
