@@ -6,10 +6,10 @@ using UnityEngine;
 public class distributeverticies : MonoBehaviour
 {
     [SerializeField]
-    float scale = 10;
+    float scale = 19;
 
     [SerializeField]
-    int numSubdivisions = 1;
+    int numSubdivisions = 2;//2 lub wiecej. kod sie nie zepsuje ale neighbours bedą popsute
 
     [SerializeField]
     float gizmosRadius = 0.1f;
@@ -31,9 +31,9 @@ public class distributeverticies : MonoBehaviour
         }
         PlaceAllVertsOnSphere();
         ScaleAndMove();
+        FindNeighbours();
+        PrintNeighbours();
 
-        List<Vector3> positions = GetVertexPositions();
-        Debug.Log("Liczba pozycji: " + positions.Count);
     }
 
     void IcoSphereDistribution()
@@ -187,16 +187,39 @@ private void OnDrawGizmos()
         }
     }
 }
-public List<Vector3> GetVertexPositions()
+
+private void FindNeighbours()
 {
-    List<Vector3> positions = new List<Vector3>();
-
-    foreach (var vertexPoint in verticies)
+    foreach(var vert in verticies)
     {
-        positions.Add(vertexPoint.position);
+        foreach(var face in faces)
+        {
+            if(vert.position==face.vertA){
+                vert.SetNeighbour(face.vertB);
+                vert.SetNeighbour(face.vertC);
+            }
+            else if(vert.position==face.vertB){
+                vert.SetNeighbour(face.vertA);
+                vert.SetNeighbour(face.vertC);
+            }
+            else if(vert.position==face.vertC){
+                vert.SetNeighbour(face.vertA);
+                vert.SetNeighbour(face.vertB);
+            }
+        }
     }
-
-    return positions;
+}
+public void PrintNeighbours()
+{
+    foreach(var vert in verticies)
+    {
+        string neighboursInfo = "Neighbours: ";
+        for (int i = 0; i < vert.neighbours.Length; i++)
+        {
+            neighboursInfo += $"[{i}] {vert.neighbours[i]}, ";
+        }
+        Debug.Log(vert.position + " amongus " + neighboursInfo);PrintVertexInfo(vert);
+        }
 }
 
 }

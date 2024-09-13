@@ -9,7 +9,6 @@ public class VertexPoint
     public VertexPoint(Vector3 position)
     {
         this.position = position;
-
     }
     public void SetNeighbour(Vector3 neighbour)
     {
