@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Face 
 {
-    public Vector3 vertA;
-    public Vector3 vertB;
-    public Vector3 vertC;
-    public Face(Vector3 vertA, Vector3 vertB, Vector3 vertC)
+    public VertexPoint vertA;
+    public VertexPoint vertB;
+    public VertexPoint vertC;
+    public Face(VertexPoint vertA, VertexPoint vertB, VertexPoint vertC)
     {
         this.vertA = vertA;
         this.vertB = vertB;
