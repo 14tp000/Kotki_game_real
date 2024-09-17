@@ -21,7 +21,7 @@ public class CameraControlScript : MonoBehaviour
     {
 
     // movement
-      float input_y = key_speed*Input.GetAxisRaw("Vertical")      + mouse_speed*(Input.GetMouseButton(2) ? 1 : 0) * Input.GetAxis("Mouse Y");
+      float input_y = key_speed*Input.GetAxisRaw("Vertical")      - mouse_speed*(Input.GetMouseButton(2) ? 1 : 0) * Input.GetAxis("Mouse Y");
       float input_x = -1*key_speed*Input.GetAxisRaw("Horizontal") + mouse_speed*(Input.GetMouseButton(2) ? 1 : 0) * Input.GetAxis("Mouse X");
 
       angleY += input_x * Time.deltaTime * dist_speed;
@@ -31,7 +31,7 @@ public class CameraControlScript : MonoBehaviour
       transform.position = Vector3.zero - transform.forward * distance;
     
     // distance
-      float input_dist = Input.mouseScrollDelta.y;
+      float input_dist = -1*Input.mouseScrollDelta.y;
       float dist_change = distance + input_dist;
       distance = distance >= min_dist ? (distance <= max_dist ? dist_change : max_dist) : min_dist;
       dist_speed = distance/20;
