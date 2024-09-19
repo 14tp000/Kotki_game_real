@@ -163,28 +163,48 @@ public class distributeverticies : MonoBehaviour
     {
         return new Vector3((v1.x + v2.x) / 2, (v1.y + v2.y) / 2, (v1.z + v2.z) / 2);
     }
-    //private void FindNeighbours()
-    //{
-    //    foreach(var vert in verticies)
-    //    {
-    //        foreach(var face in faces)
-    //        {
-    //            if(vert.position==face.vertA.position)
-    //                {
-    //                vert.SetNeighbour(face.vertB);
-    //                vert.SetNeighbour(face.vertC);
-    //            }
-    //            else if(vert.position==face.vertB.position){
-    //                vert.SetNeighbour(face.vertA);
-    //                vert.SetNeighbour(face.vertC);
-    //            }
-    //            else if(vert.position==face.vertC.position){
-    //                vert.SetNeighbour(face.vertA);
-    //                vert.SetNeighbour(face.vertB);
-    //            }
-    //        }
-    //    }
-    //}
+
+    void SortNeighbour(VertexPoint wariat)
+    {
+        Polar3 coords = new Polar3(wariat.position);
+
+        //List<List<double>> neighbour_coordinates_polar = new List<List<double>>(wariat.neighbours.size());
+        List<(VertexPoint, float)> weights = new List<(VertexPoint, float)>();
+
+        for (int i = 0; i < wariat.neighbours.Count; i++)
+        {
+            Polar3 tmp = new Polar3(wariat.neighbours[i].position);
+
+            float delta_theta = Mathf.Abs(coords.theta - tmp.theta);
+            float delta_phi = Mathf.Abs(coords.phi - tmp.phi);
+
+            //neighbour_coordinates_polar.Add(new List<double>(new double[3]));
+            //neighbour_coordinates_polar[i][0] = temp_phi;
+            //neighbour_coordinates_polar[i][1] = temp_theta;
+            //neighbour_coordinates_polar[i][2] = temp_r;
+
+            if (tmp.theta >= coords.theta && tmp.phi >= coords.phi)
+            {
+                weights.Add((wariat.neighbours[i],10 * (Mathf.Abs(delta_theta - delta_phi))));
+            }
+            else if (tmp.theta < coords.theta && tmp.phi >= coords.phi)
+            {
+                weights.Add((wariat.neighbours[i], 1 * (Mathf.Abs(delta_phi - delta_theta))));
+            }
+            else if (tmp.theta < coords.theta && tmp.phi < coords.phi)
+            {
+                weights.Add((wariat.neighbours[i], -1 * (Mathf.Abs(delta_theta - delta_phi))));
+            }
+            else
+            {
+                weights.Add((wariat.neighbours[i], -10 * (Mathf.Abs(delta_phi - delta_theta))));
+            }
+        }
+
+        weights.Sort((w1, w2) => w1.Item2.CompareTo(w2.Item1));
+
+        wariat.neighbours = weights.ConvertAll(w => w.Item1);
+    }
 
     void FindNeighbours()
     {
@@ -198,7 +218,7 @@ public class distributeverticies : MonoBehaviour
             }
         }
     }
-
+    
     VertexPoint FindClosestInList(VertexPoint point,List<VertexPoint> list,List<VertexPoint> exclude)
     {
         VertexPoint closest = list[0];
