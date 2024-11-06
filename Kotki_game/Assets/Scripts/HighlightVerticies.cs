@@ -26,6 +26,7 @@ public class HighlightVerticies : MonoBehaviour
         {
             if (hit.collider.tag == "Planet")
             {
+                Debug.Log("skibidi almost toilet");
                 verticies = hit.collider.gameObject.GetComponent<distributeverticies>().verticies;
                 UntagAll();
                 TagClosestVertex(hit.point);
@@ -54,10 +55,11 @@ public class HighlightVerticies : MonoBehaviour
         closest.highlighted = true;
 
         Debug.DrawLine(transform.position, closest.position, Color.red);
-
+        Debug.Log("skibidi not toilet");
         if (Input.GetButtonDown("Fire1"))
         {
             GameObject GO = Instantiate(mobekToSpawn, closest.position, transform.rotation);
+            Debug.Log("skibidi!!!!!!!!!");
             Destroy(GO, 3f);
         }
 
