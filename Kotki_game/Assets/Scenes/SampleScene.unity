@@ -530,6 +530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mobekToSpawn:
+  - {fileID: 8990578296524245975, guid: 9b11d651d167bb83dba6d5ab395c8f0d, type: 3}
   - {fileID: 5366140526360538004, guid: de9c1b589467ffc4ba9770dea21a73e8, type: 3}
   - {fileID: 7283997337761419780, guid: ef3782c7bb6591341a76e7611e4bb193, type: 3}
 --- !u!1660057539 &9223372036854775807
