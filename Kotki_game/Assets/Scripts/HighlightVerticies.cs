@@ -8,7 +8,7 @@ public class HighlightVerticies : MonoBehaviour
     Camera cam;
 
     [SerializeField]
-    GameObject mobekToSpawn;
+    GameObject[] mobekToSpawn;
 
     private void Start()
     {
@@ -17,7 +17,7 @@ public class HighlightVerticies : MonoBehaviour
     void Update()
     {
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 100f;
+        mousePos.z = 10000f;
         mousePos = cam.ScreenToWorldPoint(mousePos);
         Debug.DrawRay(transform.position, mousePos - transform.position, Color.blue);
 
@@ -26,12 +26,13 @@ public class HighlightVerticies : MonoBehaviour
         {
             if (hit.collider.tag == "Planet")
             {
-                Debug.Log("skibidi almost toilet");
                 verticies = hit.collider.gameObject.GetComponent<distributeverticies>().verticies;
                 UntagAll();
                 TagClosestVertex(hit.point);
             }
+
         }
+
 
     }
 
@@ -55,21 +56,23 @@ public class HighlightVerticies : MonoBehaviour
         Debug.Log("skibidi not toilet");
         if (Input.GetButtonDown("Fire1"))
         {
-            GameObject GO = Instantiate(mobekToSpawn, closest.position, transform.rotation);
+            GameObject GO = Instantiate(mobekToSpawn[0], closest.position, transform.rotation);
+            GO.transform.LookAt(Vector3.zero);
+            GO.transform.Rotate(90,0,0);
             Debug.Log("skibidi!!!!!!!!!");
-            Destroy(GO, 3f);
+            Destroy(GO, 6f);
         }
 
-        foreach (var neighbour in closest.neighbours)
-        {
-            Debug.DrawLine(transform.position, neighbour.position, Color.white);
-            neighbour.highlighted = true;
-            if (Input.GetButtonDown("Fire1"))
-            {
-                GameObject GO = Instantiate(mobekToSpawn, neighbour.position, transform.rotation);
-                Destroy(GO, 3f);
-            }
-        }
+//        foreach (var neighbour in closest.neighbours)
+//        {
+//            Debug.DrawLine(transform.position, neighbour.position, Color.white);
+//            neighbour.highlighted = true;
+//            if (Input.GetButtonDown("Fire1"))
+//            {
+//                GameObject GO = Instantiate(mobekToSpawn, neighbour.position, transform.rotation);
+//                Destroy(GO, 3f);
+//            }
+//        }
     }
 
     void UntagAll()

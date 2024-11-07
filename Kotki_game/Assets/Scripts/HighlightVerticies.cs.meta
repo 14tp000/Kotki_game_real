@@ -3,7 +3,8 @@ guid: e8c2c336506224f40880b04f614011bb
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mobekToSpawn: {fileID: 5366140526360538004, guid: de9c1b589467ffc4ba9770dea21a73e8, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

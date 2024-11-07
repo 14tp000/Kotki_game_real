@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scale: 19
-  numSubdivisions: 4
+  numSubdivisions: 5
   gizmosRadius: 0.3
 --- !u!1 &963194225
 GameObject:
@@ -529,7 +529,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c2c336506224f40880b04f614011bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobekToSpawn: {fileID: 7283997337761419780, guid: ef3782c7bb6591341a76e7611e4bb193, type: 3}
+  mobekToSpawn:
+  - {fileID: 5366140526360538004, guid: de9c1b589467ffc4ba9770dea21a73e8, type: 3}
+  - {fileID: 7283997337761419780, guid: ef3782c7bb6591341a76e7611e4bb193, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
