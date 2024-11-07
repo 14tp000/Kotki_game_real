@@ -58,7 +58,6 @@ public class HighlightVerticies : MonoBehaviour
         {
             GameObject GO = Instantiate(mobekToSpawn[0], closest.position, transform.rotation);
             GO.transform.LookAt(Vector3.zero);
-            GO.transform.Rotate(90,0,0);
             Debug.Log("skibidi!!!!!!!!!");
             Destroy(GO, 6f);
         }
