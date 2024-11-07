@@ -32,10 +32,7 @@ public class HighlightVerticies : MonoBehaviour
                 TagClosestVertex(hit.point);
             }
         }
-        else
-        {
-            Debug.Log("Did not Hit");
-        }
+
     }
 
     void TagClosestVertex(Vector3 position)
